@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="Q3 季度会 · 业务 设计 自己，10 页图片演示。">
   <title>Q3 季度会 · 业务 设计 自己</title>
-  <link rel="preload" as="image" href="assets/background.png?v=1920" imagesrcset="assets/background.png?v=9d7ec862e57c 1920w, assets/2x/background.png?v=08e83e2d1e0e 3840w, assets/original/background.png?v=ac4d97348653 5760w" imagesizes="(max-aspect-ratio: 16/9) 100vw, 177.777778vh">
+  <link rel="preload" as="image" href="assets/background.png?v=ae6e16ddc7b6" imagesrcset="assets/background.png?v=ae6e16ddc7b6 1920w, assets/2x/background.png?v=c7ac722739d4 3840w, assets/original/background.png?v=adadf71f94a9 5760w" imagesizes="(max-aspect-ratio: 16/9) 100vw, 177.777778vh">
   <link rel="preload" as="image" href="assets/01.png?v=0b2ccba92a49" imagesrcset="assets/01.png?v=0b2ccba92a49 1920w, assets/2x/01.png?v=3b688a4d6127 3840w, assets/original/01.png?v=3a8124ad661c 5760w" imagesizes="(max-aspect-ratio: 16/9) 100vw, 177.777778vh">
   <style>
     * { box-sizing: border-box; }
@@ -14,7 +14,11 @@
     #viewer { position: fixed; inset: 0; overflow: hidden; touch-action: pan-y; }
     #canvas { position: absolute; width: 1920px; height: 1080px; left: 50%; top: 50%; transform-origin: 0 0; }
     #canvas img { position: absolute; inset: 0; width: 1920px; height: 1080px; object-fit: contain; user-select: none; pointer-events: none; }
-    #background { z-index: 0; }
+    #slide-background { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+    #background-animation, #background-shade { position: absolute; inset: 0; }
+    #background-animation { z-index: 0; background-image: url('assets/ub_grid_small.gif?v=4d599d8aa41d'); background-repeat: repeat; background-position: 0 0; background-size: 560px 420px; }
+    #background-shade { z-index: 1; background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 1) 100%); }
+    #background { z-index: 2; }
     .content { z-index: 1; visibility: hidden; }
     .content.active { visibility: visible; }
     #controls { position: fixed; z-index: 3; bottom: max(18px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 4px; padding: 6px; border: 1px solid #ffffff24; border-radius: 14px; background: #161616eb; transition: opacity .2s; }
@@ -34,7 +38,11 @@
 <body>
   <main id="viewer" aria-label="Q3 季度会演示文稿">
     <div id="canvas">
-      <img id="background" src="assets/background.png?v=1920" alt="" srcset="assets/background.png?v=9d7ec862e57c 1920w, assets/2x/background.png?v=08e83e2d1e0e 3840w, assets/original/background.png?v=ac4d97348653 5760w" sizes="(max-aspect-ratio: 16/9) 100vw, 177.777778vh" draggable="false">
+      <div id="slide-background" aria-hidden="true">
+        <div id="background-animation"></div>
+        <div id="background-shade"></div>
+      <img id="background" src="assets/background.png?v=ae6e16ddc7b6" alt="" srcset="assets/background.png?v=ae6e16ddc7b6 1920w, assets/2x/background.png?v=c7ac722739d4 3840w, assets/original/background.png?v=adadf71f94a9 5760w" sizes="(max-aspect-ratio: 16/9) 100vw, 177.777778vh" draggable="false">
+      </div>
       <img class="content active" src="assets/01.png?v=0b2ccba92a49" alt="剪映双节3960万新高，YoY +10%；CapCut月活超过7亿；醒图Hypic1849万，YoY +13%；小云雀与即梦" srcset="assets/01.png?v=0b2ccba92a49 1920w, assets/2x/01.png?v=3b688a4d6127 3840w, assets/original/01.png?v=3a8124ad661c 5760w" sizes="(max-aspect-ratio: 16/9) 100vw, 177.777778vh" draggable="false">
       <img class="content" src="assets/02.png?v=3eb1b2c2ab97" alt="分三层：业务、设计、自己" srcset="assets/02.png?v=3eb1b2c2ab97 1920w, assets/2x/02.png?v=eab19c2307ac 3840w, assets/original/02.png?v=9165e1b8f0f3 5760w" sizes="(max-aspect-ratio: 16/9) 100vw, 177.777778vh" draggable="false">
       <img class="content" src="assets/03.png?v=dff4a40547f3" alt="第一层：是业务" srcset="assets/03.png?v=dff4a40547f3 1920w, assets/2x/03.png?v=94f15d05f748 3840w, assets/original/03.png?v=c8cdcdbf5cd0 5760w" sizes="(max-aspect-ratio: 16/9) 100vw, 177.777778vh" draggable="false">
