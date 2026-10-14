@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Q3 季度会 · 业务 设计 自己，9 页图片演示。">
+  <title>Q3 季度会 · 业务 设计 自己</title>
+  <link rel="preload" as="image" href="assets/background.png">
+  <link rel="preload" as="image" href="assets/01.png">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #000; }
+    body { color: #fff; font-family: system-ui, sans-serif; }
+    #viewer { position: fixed; inset: 0; overflow: hidden; touch-action: pan-y; }
+    #canvas { position: absolute; width: 1920px; height: 1080px; left: 50%; top: 50%; transform-origin: 0 0; }
+    #canvas img { position: absolute; inset: 0; width: 1920px; height: 1080px; object-fit: contain; user-select: none; pointer-events: none; }
+    #background { z-index: 0; }
+    .content { z-index: 1; visibility: hidden; }
+    .content.active { visibility: visible; }
+    #controls { position: fixed; z-index: 3; bottom: max(18px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 4px; padding: 6px; border: 1px solid #ffffff24; border-radius: 14px; background: #161616eb; transition: opacity .2s; }
+    body.idle #controls { opacity: 0; pointer-events: none; }
+    body.idle { cursor: none; }
+    #controls:focus-within { opacity: 1; pointer-events: auto; }
+    button { height: 38px; min-width: 40px; border: 0; border-radius: 9px; background: transparent; color: #ddd; font-size: 19px; cursor: pointer; }
+    button:hover { background: #ffffff18; color: #fff; }
+    button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+    button:disabled { opacity: .25; cursor: default; }
+    #counter { min-width: 66px; font-size: 13px; font-variant-numeric: tabular-nums; text-align: center; }
+    .divider { width: 1px; height: 20px; background: #ffffff25; margin: 0 4px; }
+    #error { position: fixed; inset: 0; display: none; place-items: center; background: #000; z-index: 4; text-align: center; padding: 24px; }
+    @media (prefers-reduced-motion: reduce) { #controls { transition: none; } }
+  </style>
+</head>
+<body>
+  <main id="viewer" aria-label="Q3 季度会演示文稿">
+    <div id="canvas">
+      <img id="background" src="assets/background.png" alt="" draggable="false">
+      <img class="content active" src="assets/01.png" alt="分三层：业务、设计、自己" draggable="false">
+      <img class="content" src="assets/02.png" alt="第一层：是业务" draggable="false">
+      <img class="content" src="assets/03.png" alt="小云雀与即梦" draggable="false">
+      <img class="content" src="assets/04.png" alt="第二层：是设计" draggable="false">
+      <img class="content" src="assets/05.png" alt="专业有判断，务实做事情；设计重结果，创作新想象" draggable="false">
+      <img class="content" src="assets/06.png" alt="第三层：是自己" draggable="false">
+      <img class="content" src="assets/07.png" alt="AI 写代码并不慢，慢的是组织和人的上下文。AI 去抽卡并不难，难的是创意和戏剧的内核。" draggable="false">
+      <img class="content" src="assets/08.png" alt="当工具和协作方式都在变化时，我们到底希望设计师把精力放在哪里？" draggable="false">
+      <img class="content" src="assets/09.png" alt="Q & A" draggable="false">
+    </div>
+  </main>
+  <nav id="controls" aria-label="演示控制">
+    <button id="prev" aria-label="上一页" title="上一页（←）">‹</button>
+    <span id="counter" role="status" aria-live="polite">1 / 9</span>
+    <button id="next" aria-label="下一页" title="下一页（→ / 空格）">›</button>
+    <span class="divider"></span>
+    <button id="fullscreen" aria-label="进入全屏" title="全屏（F）">⛶</button>
+  </nav>
+  <div id="error" role="alert">图片加载失败，请刷新页面重试。</div>
+  <script src="slides.js"></script>
+</body>
+</html>
